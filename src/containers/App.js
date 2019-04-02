@@ -3,6 +3,8 @@ import { Provider } from "react-redux";
 import { configureStore } from "../store";
 import { BrowserRouter as Router } from "react-router-dom";
 
+import Navbar from "./Navbar";
+
 const store = configureStore();
 
 class App extends Component {
@@ -11,7 +13,7 @@ class App extends Component {
 			<Provider store={store}>
 				<Router>
 					<div>
-						<p>Hello</p>
+						<Navbar />
 					</div>
 				</Router>
 			</Provider>
