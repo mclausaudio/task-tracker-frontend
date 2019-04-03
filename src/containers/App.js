@@ -4,6 +4,7 @@ import { configureStore } from "../store";
 import { BrowserRouter as Router } from "react-router-dom";
 
 import Navbar from "./Navbar";
+import Main from "./Main";
 
 const store = configureStore();
 
@@ -14,6 +15,7 @@ class App extends Component {
 				<Router>
 					<div>
 						<Navbar />
+						<Main />
 					</div>
 				</Router>
 			</Provider>
