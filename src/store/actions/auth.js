@@ -9,6 +9,16 @@ export function setCurrentUser(user) {
 		user
 	};
 }
+//redux thunk lets us return 'dispatch' arrow function to execute some async code BEFORE returning the action or another call
+// with thunk, we can run multiple functions, make async calls, do some logic, rather than having to immediately return an action object like the function above
+export function logoutUser() {
+	return dispatch => {
+		localStorage.clear();
+		alert("clicked");
+		//need to also set current user as an empty object.  because even though we clear the localStorage, the redux state still has us marked as logged in
+		dispatch(setCurrentUser({}));
+	};
+}
 
 export function authUser(signUpOrSignIn, userData) {
 	return dispatch => {
