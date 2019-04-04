@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchSessions } from "../store/actions/sessions";
 
@@ -8,11 +8,12 @@ class Dashboard extends Component {
 		this.props.fetchSessions();
 	}
 	render() {
-		let { sessions } = this.props;
+		let { sessions, currentUser } = this.props;
 		console.log(sessions);
 		let sessionsList = sessions.map(s => {
 			return <p>a sessions placehold</p>;
 		});
+
 		return (
 			<div className="row">
 				<div className="col-md-4">
@@ -33,6 +34,7 @@ class Dashboard extends Component {
 
 function mapStateToProps(state) {
 	return {
+		currentUser: state.currentUser,
 		sessions: state.sessions
 	};
 }

@@ -7,9 +7,11 @@ import Dashboard from "../containers/Dashboard";
 import NewForm from "../components/NewForm";
 import { authUser } from "../store/actions/auth";
 import { removeError } from "../store/actions/errors";
+import withAuth from "../hocs/withAuth";
 
 const Main = props => {
 	const { authUser, errors, removeError, currentUser } = props;
+
 	return (
 		<div className="container">
 			<Switch>
@@ -56,9 +58,11 @@ const Main = props => {
 				<Route
 					exact
 					path="/dashboard"
-					render={props => {
-						return <Dashboard {...props} />;
-					}}
+					component={withAuth(Dashboard)}
+					//Below doesn't work.. What do I do if I need to wrap a component in a HOC and pass it unique props?
+					// render={props => {
+					// 	return withAuth(<Dashboard {...props} />);
+					// }}
 				/>
 				<Route
 					exact
