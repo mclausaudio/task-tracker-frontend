@@ -1,8 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import Dashboard from "../containers/Dashboard";
 
-const Homepage = ({ currentUser }) => {
+const Homepage = ({ currentUser, history }) => {
 	if (!currentUser.isAuthenticated) {
 		return (
 			<div className="home-hero">
@@ -16,8 +16,9 @@ const Homepage = ({ currentUser }) => {
 				</Link>
 			</div>
 		);
+	} else {
+		return <Redirect to="/dashboard" />;
 	}
-	return <p>placeholder, but you are logged in nice</p>;
 };
 
 export default Homepage;
