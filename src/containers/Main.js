@@ -3,6 +3,8 @@ import { Switch, Route, withRouter, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import Homepage from "../components/Homepage";
 import AuthForm from "../components/AuthForm";
+import Dashboard from "../containers/Dashboard";
+import NewForm from "../components/NewForm";
 import { authUser } from "../store/actions/auth";
 import { removeError } from "../store/actions/errors";
 
@@ -47,6 +49,25 @@ const Main = props => {
 								buttonText="Log In"
 								heading={"Welcome Back."}
 								{...props}
+							/>
+						);
+					}}
+				/>
+				<Route
+					exact
+					path="/dashboard"
+					render={props => {
+						return <Dashboard {...props} />;
+					}}
+				/>
+				<Route
+					exact
+					path="/sessions/new"
+					render={props => {
+						return (
+							<NewForm
+								currentUser={currentUser}
+								heading={"New Session"}
 							/>
 						);
 					}}

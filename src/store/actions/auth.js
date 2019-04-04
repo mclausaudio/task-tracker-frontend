@@ -1,4 +1,4 @@
-import { apiCall } from "../../services/api";
+import { apiCall, setTokenHeader } from "../../services/api";
 import { SET_CURRENT_USER } from "../actionTypes";
 import { addError, removeError } from "./errors";
 
@@ -14,10 +14,14 @@ export function setCurrentUser(user) {
 export function logoutUser() {
 	return dispatch => {
 		localStorage.clear();
-		alert("clicked");
+		setAuthorizationHeader(false);
 		//need to also set current user as an empty object.  because even though we clear the localStorage, the redux state still has us marked as logged in
 		dispatch(setCurrentUser({}));
 	};
+}
+
+export function setAuthorizationHeader(token) {
+	setTokenHeader(token);
 }
 
 export function authUser(signUpOrSignIn, userData) {
@@ -26,6 +30,7 @@ export function authUser(signUpOrSignIn, userData) {
 			return apiCall("post", `/api/auth/${signUpOrSignIn}/`, userData)
 				.then(({ token, ...userInfo }) => {
 					localStorage.setItem("jwtToken", token);
+					setAuthorizationHeader(token);
 					dispatch(setCurrentUser(userInfo));
 					dispatch(removeError());
 					resolve();

@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Dashboard from "../containers/Dashboard";
 
 const Homepage = ({ currentUser }) => {
 	if (!currentUser.isAuthenticated) {
@@ -16,11 +17,7 @@ const Homepage = ({ currentUser }) => {
 			</div>
 		);
 	}
-	return (
-		<div>
-			<h1>you made import PropTypes from 'prop-types'</h1>
-		</div>
-	);
+	return <p>placeholder, but you are logged in nice</p>;
 };
 
 export default Homepage;

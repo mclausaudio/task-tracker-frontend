@@ -28,7 +28,7 @@ export default class AuthForm extends Component {
 			.onAuth(authType, this.state)
 			.then(() => {
 				console.log("success");
-				this.props.history.push("/");
+				this.props.history.push("/dashboard");
 			})
 			.catch(err => err);
 	};
