@@ -14,10 +14,7 @@ const store = configureStore();
 if (localStorage.jwtToken) {
 	setAuthorizationHeader(localStorage.jwtToken);
 	//we want to use a try statement so people don't tamper with the jwtToken key
-	console.log("decoded token", jwtDecode(localStorage.jwtToken));
 	try {
-		console.log("localStorage.jwtToken", localStorage.jwtToken);
-
 		//we need to take the token in storage and use jwtDecode, to decode the middle part of the token and provide the appropriate user info. so using setCurrentUser with the decoded info, which is a user object, if all goes right and it wasnt messed with
 		store.dispatch(setCurrentUser(jwtDecode(localStorage.jwtToken)));
 	} catch (err) {

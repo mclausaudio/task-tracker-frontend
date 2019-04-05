@@ -23,10 +23,8 @@ export function apiCall(method, path, data) {
 export function setTokenHeader(token) {
 	// alert("inside set token header");
 	if (token) {
-		alert("setTokenHeader inside if");
 		axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 	} else {
-		alert("setTokenHeader inside else");
 		delete axios.defaults.headers.common["Authorization"];
 	}
 }

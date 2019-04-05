@@ -14,6 +14,7 @@ const Main = props => {
 
 	return (
 		<div className="container">
+			<p>in switch</p>
 			<Switch>
 				<Route
 					exact
@@ -67,14 +68,7 @@ const Main = props => {
 				<Route
 					exact
 					path="/sessions/new"
-					render={props => {
-						return (
-							<NewForm
-								currentUser={currentUser}
-								heading={"New Session"}
-							/>
-						);
-					}}
+					component={withAuth(NewForm)}
 				/>
 			</Switch>
 		</div>

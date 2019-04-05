@@ -5,11 +5,8 @@ import { connect } from "react-redux";
 // it is simply a function that wraps another component to provide it with additional functionality
 
 export default function withAuth(ComponentToBeRendered) {
-	alert("inside withatuh");
 	class Authenticate extends Component {
 		componentDidMount() {
-			alert("componentDidMount");
-			alert("this.props.isAuthenticated =", this.props.isAuthenticated);
 			if (this.props.isAuthenticated === false) {
 				this.props.history.push("/signin");
 			}
@@ -20,7 +17,6 @@ export default function withAuth(ComponentToBeRendered) {
 			}
 		}
 		render() {
-			alert("inside render");
 			//we need to use this.props because it's to point to the componentToBeRendered props.
 			return <ComponentToBeRendered {...this.props} />;
 		}

@@ -1,17 +1,28 @@
 import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { fetchSessions } from "../store/actions/sessions";
+import { fetchActivities } from "../store/actions/activities";
+
+import Card from "../components/Card";
 
 class Dashboard extends Component {
 	componentDidMount() {
-		this.props.fetchSessions();
+		this.props.fetchActivities(this.props.currentUser.user.id);
 	}
 	render() {
-		let { sessions, currentUser } = this.props;
-		console.log(sessions);
-		let sessionsList = sessions.map(s => {
-			return <p>a sessions placehold</p>;
+		let { activities, currentUser } = this.props;
+		console.log(activities);
+		let activitiesList = activities.map(a => {
+			return (
+				<Card
+					key={a.id}
+					title={a.title}
+					isPrivate={a.isPrivate}
+					description={a.description}
+					picture={a.activityPicture}
+					sessions={a.sessions}
+				/>
+			);
 		});
 
 		return (
@@ -24,8 +35,9 @@ class Dashboard extends Component {
 						<Link to="/sessions/new">New Session</Link>
 						<Link to="/activities/">View Activities</Link>
 					</div>
-					<p>Recent Sessions:</p>
-					{sessionsList}
+					<p>Your Activities:</p>
+					<div className="row d-flex" />
+					{activitiesList}
 				</div>
 			</div>
 		);
@@ -35,11 +47,11 @@ class Dashboard extends Component {
 function mapStateToProps(state) {
 	return {
 		currentUser: state.currentUser,
-		sessions: state.sessions
+		activities: state.activities
 	};
 }
 
 export default connect(
 	mapStateToProps,
-	{ fetchSessions }
+	{ fetchActivities }
 )(Dashboard);
