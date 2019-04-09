@@ -17,9 +17,9 @@ class ActivityFeed extends Component {
 		this.props.fetchActivities(this.props.currentUser.user.id);
 	}
 
-	componentDidUpdate() {
-		this.props.fetchActivities(this.props.currentUser.user.id);
-	}
+	// componentDidUpdate() {
+	// 	this.props.fetchActivities(this.props.currentUser.user.id);
+	// }
 	toggleNewActivity = () => {
 		let toggle = !this.state.displayAddActivity;
 		this.setState({

@@ -6,7 +6,7 @@ import SessionCard from "../components/SessionCard";
 import SessionEditForm from "../components/SessionEditForm";
 
 import { fetchOneActivity, removeActivity } from "../store/actions/activities";
-import { fetchOneSession } from "../store/actions/sessions";
+import { fetchOneSession, deleteSession } from "../store/actions/sessions";
 import { removeError } from "../store/actions/errors";
 
 class Activity extends Component {
@@ -32,6 +32,11 @@ class Activity extends Component {
 		});
 	};
 
+	deleteSession = sessionId => {
+		this.props.deleteSession(sessionId);
+		this.props.history.push("/dashboard");
+	};
+
 	render() {
 		if (!this.props.activity) {
 			return <Redirect to="/dashboard" />;
@@ -44,11 +49,13 @@ class Activity extends Component {
 			return (
 				<SessionCard
 					sessionId={s._id}
+					// activityId={this.props.activity._id}
+					activityId={s.activityId}
 					createdAt={s.createdAt}
 					description={s.notes}
-					picture="default"
 					toggleEditing={this.toggleEditing}
 					totalTimeSpent={s.totalTimeSpent}
+					deleteSession={this.deleteSession}
 				/>
 			);
 		});
@@ -93,5 +100,5 @@ function mapStateToProps(state) {
 
 export default connect(
 	mapStateToProps,
-	{ fetchOneActivity, removeError, removeActivity }
+	{ fetchOneActivity, removeError, deleteSession }
 )(Activity);

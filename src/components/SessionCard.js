@@ -1,17 +1,21 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
+import { deleteSession } from "../store/actions/sessions";
+
 class SessionCard extends Component {
 	handleToggle = () => {
 		this.props.toggleEditing(this.props.sessionId);
 	};
+
 	render() {
 		let {
 			description,
 			createdAt,
 			picture,
 			totalTimeSpent,
-			sessionId
+			sessionId,
+			activityId
 		} = this.props;
 		return (
 			<div className="card">
@@ -34,7 +38,15 @@ class SessionCard extends Component {
 					>
 						Edit
 					</button>
-					<button className="btn btn-danger btn-block">Delete</button>
+					<button
+						className="btn btn-danger btn-block"
+						onClick={() => {
+							console.log(sessionId);
+							this.props.deleteSession({ activityId, sessionId });
+						}}
+					>
+						Delete
+					</button>
 				</div>
 			</div>
 		);

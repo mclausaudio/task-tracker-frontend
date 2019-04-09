@@ -9,7 +9,6 @@ const activities = (state = [], action) => {
 		case LOAD_ACTIVITIES:
 			return [...action.activities];
 		case LOAD_ONE_ACTIVITY:
-			console.log("hello", action.activity);
 			return [action.activity];
 		case REMOVE_ACTIVITY:
 			return [];
