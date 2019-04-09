@@ -11,7 +11,9 @@ export default class TimerContainer extends Component {
 		};
 	}
 
-	timerComplete = e => {};
+	// timerComplete = e => {
+	// 	e.preventDefault();
+	// };
 
 	render() {
 		let { seconds, showTimer } = this.state;

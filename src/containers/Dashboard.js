@@ -1,43 +1,23 @@
 import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { fetchActivities } from "../store/actions/activities";
 
-import Card from "../components/Card";
+import ActivityFeed from "../components/ActivityFeed";
 
 class Dashboard extends Component {
-	componentDidMount() {
-		this.props.fetchActivities(this.props.currentUser.user.id);
-	}
 	render() {
 		let { activities, currentUser } = this.props;
-		console.log(activities);
-		let activitiesList = activities.map(a => {
-			return (
-				<Card
-					key={a.id}
-					title={a.title}
-					isPrivate={a.isPrivate}
-					description={a.description}
-					picture={a.activityPicture}
-					sessions={a.sessions}
-				/>
-			);
-		});
+		console.log("dash", activities);
 
 		return (
 			<div className="row">
-				<div className="col-md-4">
+				{/* below is side bar, can break out into component */}
+				<div className="col-md-2">
 					<p>Hello</p>
 				</div>
-				<div className="col-md-8">
-					<div>
-						<Link to="/sessions/new">New Session</Link>
-						<Link to="/activities/">View Activities</Link>
-					</div>
-					<p>Your Activities:</p>
-					<div className="row d-flex" />
-					{activitiesList}
+				{/* below is main feed */}
+				<div className="col-md-10">
+					<ActivityFeed />
 				</div>
 			</div>
 		);
@@ -46,12 +26,8 @@ class Dashboard extends Component {
 
 function mapStateToProps(state) {
 	return {
-		currentUser: state.currentUser,
-		activities: state.activities
+		currentUser: state.currentUser
 	};
 }
 
-export default connect(
-	mapStateToProps,
-	{ fetchActivities }
-)(Dashboard);
+export default connect(mapStateToProps)(Dashboard);

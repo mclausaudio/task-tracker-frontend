@@ -30,16 +30,18 @@ export default class Timer extends Component {
 
 	endTimer = e => {
 		clearInterval(this.timer);
+		console.log(this.props.timerComplete);
+		console.log(this.props);
+		this.props.timerComplete(this.state.seconds);
 		this.setState({
 			isTiming: false,
 			seconds: 0
 		});
-		this.props.handleTimerComplete(this.state.seconds);
 	};
 
 	render() {
 		let { seconds, isTiming } = this.state;
-		let { handleTimerComplete } = this.props;
+
 		return (
 			<div>
 				<h2>{seconds}</h2>
@@ -49,7 +51,7 @@ export default class Timer extends Component {
 					<button onClick={this.startTimer}>Start</button>
 				)}
 
-				<button onClick={handleTimerComplete}>Finish</button>
+				<button onClick={this.endTimer}>Finish</button>
 			</div>
 		);
 	}

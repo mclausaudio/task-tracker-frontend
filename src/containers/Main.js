@@ -4,7 +4,8 @@ import { connect } from "react-redux";
 import Homepage from "../components/Homepage";
 import AuthForm from "../components/AuthForm";
 import Dashboard from "../containers/Dashboard";
-import NewForm from "../components/NewForm";
+import NewSession from "../containers/NewSession";
+import Activity from "./Activity";
 import { authUser } from "../store/actions/auth";
 import { removeError } from "../store/actions/errors";
 import withAuth from "../hocs/withAuth";
@@ -59,7 +60,10 @@ const Main = props => {
 				<Route
 					exact
 					path="/dashboard"
-					component={withAuth(Dashboard)}
+					render={props => {
+						return <Dashboard {...props} />;
+					}}
+					// component={withAuth(Dashboard)}
 					//Below doesn't work.. What do I do if I need to wrap a component in a HOC and pass it unique props?
 					// render={props => {
 					// 	return withAuth(<Dashboard {...props} />);
@@ -67,8 +71,16 @@ const Main = props => {
 				/>
 				<Route
 					exact
-					path="/sessions/new"
-					component={withAuth(NewForm)}
+					path="/users/:id/activities/:activity_id"
+					// component={withAuth(Activity)}
+					render={props => {
+						return <Activity {...props} />;
+					}}
+				/>
+				<Route
+					exact
+					path="/users/:id/activities/:activity_id/sessions/new"
+					component={withAuth(NewSession)}
 				/>
 			</Switch>
 		</div>
