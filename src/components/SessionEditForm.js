@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { fetchOneSession } from "../store/actions/sessions";
+import { fetchOneSession, updateSession } from "../store/actions/sessions";
 
 class SessionEditForm extends Component {
 	constructor(props) {
@@ -19,15 +19,15 @@ class SessionEditForm extends Component {
 				notes: this.props.sessionToEdit[0].notes,
 				isPrivate: this.props.sessionToEdit[0].isPrivate
 			});
-			console.log("inside component did mount edit form", this.state);
+			console.log(
+				"inside component did mount edit form",
+				this.props.sessionToEdit[0]
+			);
 		};
 		console.log("right after async", this.props);
 		grabOne();
 	}
 
-	componentWillUnmount() {
-		console.log("unmounted");
-	}
 	handleChange = e => {
 		console.log(e.target.name, e.target.value);
 		if (e.target.name === "isPrivate") {
@@ -49,11 +49,24 @@ class SessionEditForm extends Component {
 
 	handleSubmit = e => {
 		e.preventDefault();
+		let updatedSession = {
+			notes: this.state.notes,
+			isPrivate: this.state.isPrivate,
+			activityId: this.props.activityId,
+			sessionId: this.props.sessionId
+		};
+		console.log("updated session ======", updatedSession);
+		const update = async () => {
+			await this.props.updateSession(updatedSession);
+		};
+		update();
+		this.props.toggleEditing();
 	};
 	render() {
 		let { userId, activityId, sessionId, toggleEditing } = this.props;
 		return (
 			<div>
+				<p>Session id = {sessionId}</p>
 				<div className="row justify-content-md-center text-center">
 					<div className="col-md-6">
 						<form onSubmit={this.handleSubmit}>
@@ -109,5 +122,5 @@ function mapStateToProps(state) {
 
 export default connect(
 	mapStateToProps,
-	{ fetchOneSession }
+	{ fetchOneSession, updateSession }
 )(SessionEditForm);

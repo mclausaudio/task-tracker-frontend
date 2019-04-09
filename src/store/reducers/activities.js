@@ -12,9 +12,7 @@ const activities = (state = [], action) => {
 			console.log("hello", action.activity);
 			return [action.activity];
 		case REMOVE_ACTIVITY:
-			console.log("removing activity");
 			return [];
-
 		default:
 			return state;
 	}

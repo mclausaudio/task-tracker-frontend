@@ -61,3 +61,18 @@ export const postNewSession = sessionObject => (dispatch, getState) => {
 		.then(res => {})
 		.catch(err => dispatch(addError(err.message)));
 };
+
+export const updateSession = updatedSession => (dispatch, getState) => {
+	let { currentUser } = getState();
+	const id = currentUser.user.id;
+
+	return apiCall(
+		"post",
+		`/api/users/${id}/activities/${updatedSession.activityId}/sessions/${
+			updatedSession.sessionId
+		}`,
+		updatedSession
+	)
+		.then(res => {})
+		.catch(err => dispatch(addError(err.message)));
+};
