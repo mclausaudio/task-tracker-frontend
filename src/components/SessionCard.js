@@ -41,7 +41,7 @@ class SessionCard extends Component {
 					<button
 						className="btn btn-danger btn-block"
 						onClick={() => {
-							console.log(sessionId);
+							console.log(this.props);
 							this.props.deleteSession({ activityId, sessionId });
 						}}
 					>

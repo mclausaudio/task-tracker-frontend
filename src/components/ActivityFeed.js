@@ -10,16 +10,22 @@ class ActivityFeed extends Component {
 		super(props);
 		this.state = {
 			displayAddActivity: false,
-			addActivityBtnText: "New Activity"
+			addActivityBtnText: "New Activity",
+			activities: []
 		};
 	}
+
+	renderActivities = async () => {
+		await this.props.fetchActivities(this.props.currentUser.user.id);
+		this.setState({
+			activities: this.props.activities
+		});
+	};
+
 	componentDidMount() {
-		this.props.fetchActivities(this.props.currentUser.user.id);
+		this.renderActivities();
 	}
 
-	// componentDidUpdate() {
-	// 	this.props.fetchActivities(this.props.currentUser.user.id);
-	// }
 	toggleNewActivity = () => {
 		let toggle = !this.state.displayAddActivity;
 		this.setState({
@@ -28,31 +34,39 @@ class ActivityFeed extends Component {
 		});
 	};
 
-	handleActivitySubmit = () => {
-		this.setState({
-			displayAddActivity: false
-		});
+	handleActivitySubmit = activity => {
+		this.toggleNewActivity();
+		let post = async () => {
+			await this.props.postNewActivity(activity);
+		};
+		post();
+		this.renderActivities();
 	};
 
 	render() {
 		let { displayAddActivity, addActivityBtnText } = this.state;
-		let { activities, errors, currentUser } = this.props;
-		console.log(activities);
-		let activitiesList = activities.map(a => {
-			return (
-				<Card
-					currentUser={currentUser}
-					key={a._id}
-					id={a._id}
-					title={a.title}
-					isPrivate={a.isPrivate}
-					description={a.description}
-					picture={a.activityPicture}
-					sessions={a.sessions}
-					path={`users/${currentUser.user.id}/activities/${a._id}`}
-				/>
-			);
-		});
+		let { errors, currentUser } = this.props;
+		// console.log(activities.length);
+		let activitiesList = <p>No activities</p>;
+		if (this.state.activities.length > 0) {
+			activitiesList = this.state.activities.map(a => {
+				return (
+					<Card
+						currentUser={currentUser}
+						key={a._id}
+						id={a._id}
+						title={a.title}
+						isPrivate={a.isPrivate}
+						description={a.description}
+						picture={a.activityPicture}
+						sessions={a.sessions}
+						path={`users/${currentUser.user.id}/activities/${
+							a._id
+						}`}
+					/>
+				);
+			});
+		}
 
 		return (
 			<div>
@@ -69,7 +83,6 @@ class ActivityFeed extends Component {
 				)}
 				{displayAddActivity && (
 					<NewActivityForm
-						postNewActivity={this.props.postNewActivity}
 						activitySubmit={this.handleActivitySubmit}
 					/>
 				)}

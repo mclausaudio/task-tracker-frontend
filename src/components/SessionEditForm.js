@@ -57,10 +57,11 @@ class SessionEditForm extends Component {
 		};
 		console.log("updated session ======", updatedSession);
 		const update = async () => {
-			await this.props.updateSession(updatedSession);
+			let updated = await this.props.updateSession(updatedSession);
+			console.log(updated);
 		};
 		update();
-		this.props.toggleEditing();
+		this.props.toggleEditing(null);
 	};
 	render() {
 		let { userId, activityId, sessionId, toggleEditing } = this.props;

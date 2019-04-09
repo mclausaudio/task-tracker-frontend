@@ -18,23 +18,33 @@ class Activity extends Component {
 		};
 	}
 
-	componentDidMount() {
-		this.props.fetchOneActivity(
+	renderSessions = async () => {
+		console.log("rendering sessions");
+		await this.props.fetchOneActivity(
 			this.props.match.params.id,
 			this.props.match.params.activity_id
 		);
+	};
+
+	componentDidMount() {
+		this.renderSessions();
 	}
+
 	toggleEditing = sessionId => {
 		let toggle = !this.state.isEditing;
 		this.setState({
 			isEditing: toggle,
 			sessionIdToEdit: sessionId
 		});
+		this.renderSessions();
 	};
 
 	deleteSession = sessionId => {
-		this.props.deleteSession(sessionId);
-		this.props.history.push("/dashboard");
+		this.props.activity.sessions = [];
+		let deleteSession = async () =>
+			await this.props.deleteSession(sessionId);
+		deleteSession();
+		this.renderSessions();
 	};
 
 	render() {
@@ -70,9 +80,15 @@ class Activity extends Component {
 							activityId={this.props.activity._id}
 							sessionId={this.state.sessionIdToEdit}
 							toggleEditing={this.toggleEditing}
+							renderSessions={this.renderSessions}
 						/>
 					</div>
 				) : (
+					// <Link to={{
+					// 	pathname: '/template',
+					// 	search: '?query=abc',
+					// 	state: { detail: response.data }
+					// }}> My Link </Link>
 					<Link
 						className="btn btn-primary"
 						to={`/users/${this.props.match.params.id}/activities/${

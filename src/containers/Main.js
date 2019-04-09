@@ -80,7 +80,10 @@ const Main = props => {
 				<Route
 					exact
 					path="/users/:id/activities/:activity_id/sessions/new"
-					component={withAuth(NewSession)}
+					render={props => {
+						return <NewSession {...props} />;
+					}}
+					// component={withAuth(NewSession)}
 				/>
 			</Switch>
 		</div>

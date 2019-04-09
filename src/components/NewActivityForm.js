@@ -43,15 +43,13 @@ export default class NewActivityForm extends Component {
 				description: this.state.description,
 				activityPicture: this.state.activityPicture
 			};
-			console.log(newActivity);
-			this.props.postNewActivity(newActivity);
+			this.props.activitySubmit(newActivity);
 			this.setState({
 				title: "",
 				isPrivate: false,
 				description: "",
 				activityPicture: ""
 			});
-			this.props.activitySubmit();
 		}
 	};
 	render() {

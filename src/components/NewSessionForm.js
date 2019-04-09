@@ -35,6 +35,9 @@ export default class NewSessionForm extends Component {
 			notes: "",
 			isPrivate: false
 		});
+		console.log("new session props", this.props);
+		// http://localhost:3000/users/5cabefb9129af10f68f311c7/activities/5cabf5a6129af10f68f311ca
+		// this.props.history.push()
 	};
 
 	render() {
