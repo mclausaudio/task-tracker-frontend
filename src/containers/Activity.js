@@ -8,6 +8,12 @@ import SessionEditForm from "../components/SessionEditForm";
 import { fetchOneActivity, removeActivity } from "../store/actions/activities";
 import { fetchOneSession, deleteSession } from "../store/actions/sessions";
 import { removeError } from "../store/actions/errors";
+import Chart from "../components/Chart";
+
+import {
+	secondsConverter,
+	secondsToMinsRounded
+} from "../services/secondsConverters";
 
 class Activity extends Component {
 	constructor(props) {
@@ -18,9 +24,9 @@ class Activity extends Component {
 		};
 	}
 
-	renderSessions = async () => {
-		console.log("rendering sessions");
-		await this.props.fetchOneActivity(
+	renderSessions = () => {
+		console.log("rerendering");
+		this.props.fetchOneActivity(
 			this.props.match.params.id,
 			this.props.match.params.activity_id
 		);
@@ -40,10 +46,7 @@ class Activity extends Component {
 	};
 
 	deleteSession = sessionId => {
-		this.props.activity.sessions = [];
-		let deleteSession = async () =>
-			await this.props.deleteSession(sessionId);
-		deleteSession();
+		this.props.deleteSession(sessionId);
 		this.renderSessions();
 	};
 
@@ -54,12 +57,16 @@ class Activity extends Component {
 		let { activity } = this.props;
 		let { isEditing } = this.state;
 		let totalTime = 0;
-		let listOfSessions = activity.sessions.map(s => {
+		let timeArray = [];
+		let dateArray = [];
+		let listOfSessions = activity.sessions.reverse().map(s => {
 			totalTime += s.totalTimeSpent;
+			timeArray.push(secondsToMinsRounded(s.totalTimeSpent));
+			dateArray.push(s.createdAt);
+
 			return (
 				<SessionCard
 					sessionId={s._id}
-					// activityId={this.props.activity._id}
 					activityId={s.activityId}
 					createdAt={s.createdAt}
 					description={s.notes}
@@ -71,8 +78,9 @@ class Activity extends Component {
 		});
 		console.log(this.props);
 		return (
-			<div>
+			<div className="text-center">
 				<h2>{activity.title}</h2>
+				<Chart timeArray={timeArray} dateArray={dateArray} />
 				{isEditing ? (
 					<div>
 						<SessionEditForm
@@ -84,24 +92,30 @@ class Activity extends Component {
 						/>
 					</div>
 				) : (
-					// <Link to={{
-					// 	pathname: '/template',
-					// 	search: '?query=abc',
-					// 	state: { detail: response.data }
-					// }}> My Link </Link>
-					<Link
-						className="btn btn-primary"
-						to={`/users/${this.props.match.params.id}/activities/${
-							this.props.match.params.activity_id
-						}/sessions/new`}
-					>
-						New Session
-					</Link>
+					<div>
+						<Link
+							className="btn btn-primary mr-3"
+							to={`/users/${
+								this.props.match.params.id
+							}/activities/${
+								this.props.match.params.activity_id
+							}/sessions/new`}
+						>
+							New Session
+						</Link>
+						<button
+							className="btn btn-info"
+							onClick={this.renderSessions}
+						>
+							Reload
+						</button>
+					</div>
 				)}
-
-				<p>Total Time: {totalTime}</p>
-				<h4>Sessions:</h4>
-				{listOfSessions}
+				<h2>Total Time: {secondsConverter(totalTime)}</h2>
+				<h4>Sessions (starting with most recent):</h4>
+				<div className="d-flex justify-content-center flex-wrap">
+					{listOfSessions}
+				</div>
 			</div>
 		);
 	}

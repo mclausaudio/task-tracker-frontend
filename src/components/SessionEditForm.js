@@ -66,48 +66,45 @@ class SessionEditForm extends Component {
 	render() {
 		let { userId, activityId, sessionId, toggleEditing } = this.props;
 		return (
-			<div>
-				<p>Session id = {sessionId}</p>
-				<div className="row justify-content-md-center text-center">
-					<div className="col-md-6">
-						<form onSubmit={this.handleSubmit}>
-							<label htmlFor="email">Notes:</label>
-							<textarea
-								type="text"
-								id="notes"
-								name="notes"
-								className="form-control"
-								value={this.state.notes}
+			<div className="row justify-content-md-center text-center">
+				<div className="col-md-6">
+					<form onSubmit={this.handleSubmit}>
+						<label htmlFor="email">Notes:</label>
+						<textarea
+							type="text"
+							id="notes"
+							name="notes"
+							className="form-control"
+							value={this.state.notes}
+							onChange={this.handleChange}
+						/>
+						<div>
+							<label htmlFor="isPrivate">
+								Would you like to hide this activity on your
+								dashboard?
+							</label>
+							<select
+								value={this.state.value}
+								name="isPrivate"
 								onChange={this.handleChange}
-							/>
-							<div>
-								<label htmlFor="isPrivate">
-									Would you like to hide this activity on your
-									dashboard?
-								</label>
-								<select
-									value={this.state.value}
-									name="isPrivate"
-									onChange={this.handleChange}
-								>
-									<option value={false}>No</option>
-									<option value={true}>Yes</option>
-								</select>
-							</div>
-							<button
-								type="submit"
-								className="btn btn-primary btn-block btn-lg"
 							>
-								Update
-							</button>
-							<button
-								className="btn btn-primary btn-block btn-lg"
-								onClick={toggleEditing}
-							>
-								Cancel
-							</button>
-						</form>
-					</div>
+								<option value={false}>No</option>
+								<option value={true}>Yes</option>
+							</select>
+						</div>
+						<button
+							type="submit"
+							className="btn btn-primary btn-block btn-lg"
+						>
+							Update
+						</button>
+						<button
+							className="btn btn-primary btn-block btn-lg"
+							onClick={toggleEditing}
+						>
+							Cancel
+						</button>
+					</form>
 				</div>
 			</div>
 		);

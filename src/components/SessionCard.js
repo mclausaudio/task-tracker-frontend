@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-
+import Moment from "react-moment";
 import { deleteSession } from "../store/actions/sessions";
+
+import { secondsConverter } from "../services/secondsConverters";
 
 class SessionCard extends Component {
 	handleToggle = () => {
@@ -19,16 +21,12 @@ class SessionCard extends Component {
 		} = this.props;
 		return (
 			<div className="card">
-				<img
-					className="card-img-top"
-					src={picture}
-					alt="Card image cap"
-				/>
 				<div className="card-body">
-					<h5 className="card-title">{createdAt}</h5>
+					<h5 className="card-title">
+						<Moment parse="YYYY-MM-DD HH:mm">{createdAt}</Moment>
+					</h5>
 					<p className="card-text">
-						Session duration: {totalTimeSpent}
-						{sessionId}
+						Session duration: {secondsConverter(totalTimeSpent)}
 					</p>
 
 					<p className="card-text">{description}</p>

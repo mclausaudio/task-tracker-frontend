@@ -2,6 +2,8 @@ import React, { Component } from "react";
 
 import Timer from "./Timer";
 
+import { secondsConverter } from "../services/secondsConverters";
+
 export default class TimerContainer extends Component {
 	constructor(props) {
 		super(props);
@@ -11,10 +13,6 @@ export default class TimerContainer extends Component {
 		};
 	}
 
-	// timerComplete = e => {
-	// 	e.preventDefault();
-	// };
-
 	render() {
 		let { seconds, showTimer } = this.state;
 		return (
@@ -22,7 +20,7 @@ export default class TimerContainer extends Component {
 				{showTimer ? (
 					<Timer handleTimerComplete={this.timerComplete} />
 				) : (
-					<h1>You worked for {seconds}</h1>
+					<h1>You worked for {secondsConverter(seconds)}</h1>
 				)}
 			</div>
 		);

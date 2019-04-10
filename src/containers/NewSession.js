@@ -4,6 +4,9 @@ import Timer from "../components/Timer";
 import NewSessionForm from "../components/NewSessionForm";
 
 import { postNewSession } from "../store/actions/sessions";
+import { fetchOneActivity } from "../store/actions/activities";
+
+import { secondsConverter } from "../services/secondsConverters";
 
 class NewSession extends Component {
 	constructor(props) {
@@ -30,12 +33,12 @@ class NewSession extends Component {
 			userId: this.props.match.params.id
 		};
 		this.props.postNewSession(newSession);
-		this.props.history.push("/dashboard");
-		// the below redirect wasn't working, goes to the appropriate activity but doesn't display the new one
-		// I think because reacts redirect is faster than the actual new activity being saved into DB
-		// `/users/${this.props.match.params.id}/activities/${
-		// 	this.props.match.params.activity_id
-		// }`;
+		// this.props.fetchOneActivity(newSession.userId, newSession.activityId);
+		this.props.history.push(
+			`/users/${this.props.match.params.id}/activities/${
+				this.props.match.params.activity_id
+			}`
+		);
 	};
 
 	render() {
@@ -48,7 +51,7 @@ class NewSession extends Component {
 						<Timer timerComplete={this.handleTimerComplete} />
 					) : (
 						<div>
-							<h1>Final Duration: {seconds}</h1>
+							<h1>Final Duration: {secondsConverter(seconds)}</h1>
 							<NewSessionForm
 								sessionSubmit={this.handleSessionSubmit}
 							/>
@@ -70,5 +73,5 @@ function mapStateToProps(state) {
 
 export default connect(
 	mapStateToProps,
-	{ postNewSession }
+	{ postNewSession, fetchOneActivity }
 )(NewSession);

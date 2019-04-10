@@ -1,5 +1,6 @@
 import { apiCall } from "../../services/api";
 import { addError } from "./errors";
+import { fetchOneActivity } from "./activities";
 import {
 	LOAD_SESSIONS,
 	REMOVE_SESSION,
@@ -46,7 +47,6 @@ export const fetchOneSession = (userId, activityId, sessionId) => {
 		)
 			.then(res => {
 				dispatch(loadOneSession(res));
-				console.log("inside fetchOnesession", res);
 			})
 			.catch(err => {
 				dispatch(addError(err.message));
@@ -64,7 +64,9 @@ export const postNewSession = sessionObject => (dispatch, getState) => {
 		`/api/users/${id}/activities/${sessionObject.activityId}/sessions`,
 		sessionObject
 	)
-		.then(res => {})
+		.then(res => {
+			dispatch(fetchOneActivity(id, sessionObject.activityId));
+		})
 		.catch(err => dispatch(addError(err.message)));
 };
 
@@ -89,14 +91,15 @@ export const deleteSession = idObj => (dispatch, getState) => {
 	console.log("action", idObj);
 	let { currentUser } = getState();
 	const id = currentUser.user.id;
-
 	return apiCall(
 		"delete",
 		`/api/users/${id}/activities/${idObj.activityId}/sessions/${
 			idObj.sessionId
 		}`
 	)
-		.then(res => {})
+		.then(res => {
+			dispatch(removeSession());
+		})
 		.catch(err => {
 			dispatch(addError(err.message));
 		});

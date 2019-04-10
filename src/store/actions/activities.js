@@ -31,7 +31,6 @@ export const fetchActivities = userId => {
 	return dispatch => {
 		return apiCall("get", `/api/users/${userId}/activities`)
 			.then(res => {
-				console.log("firing inside getch .then");
 				dispatch(loadActivities(res));
 			})
 			.catch(err => {
@@ -55,7 +54,9 @@ export const postNewActivity = activityObject => (dispatch, getState) => {
 	const id = currentUser.user.id;
 	console.log(id);
 	return apiCall("post", `/api/users/${id}/activities`, activityObject)
-		.then(res => {})
+		.then(res => {
+			dispatch(fetchActivities(id));
+		})
 		.catch(err => dispatch(addError(err.message)));
 };
 // /api/users /: id / activities / activity_id
@@ -65,7 +66,9 @@ export const deleteActivity = activityId => (dispatch, getState) => {
 	const id = currentUser.user.id;
 
 	return apiCall("delete", `/api/users/${id}/activities/${activityId}/`)
-		.then(res => {})
+		.then(res => {
+			dispatch(fetchActivities(id));
+		})
 		.catch(err => {
 			dispatch(addError(err.message));
 		});

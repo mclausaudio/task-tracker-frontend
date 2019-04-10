@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { secondsConverter } from "../services/secondsConverters";
 
 export default class Timer extends Component {
 	constructor(props) {
@@ -29,9 +30,6 @@ export default class Timer extends Component {
 	};
 
 	endTimer = e => {
-		clearInterval(this.timer);
-		console.log(this.props.timerComplete);
-		console.log(this.props);
 		this.props.timerComplete(this.state.seconds);
 		this.setState({
 			isTiming: false,
@@ -44,7 +42,7 @@ export default class Timer extends Component {
 
 		return (
 			<div>
-				<h2>{seconds}</h2>
+				<h2>{secondsConverter(seconds)}</h2>
 				{isTiming ? (
 					<button onClick={this.pauseTimer}>Pause</button>
 				) : (

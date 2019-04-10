@@ -21,6 +21,12 @@ class ActivityFeed extends Component {
 		};
 	}
 
+	// renderActivities = async () => {
+	// 	await this.props.fetchActivities(this.props.currentUser.user.id);
+	// 	this.setState({
+	// 		activities: this.props.activities
+	// 	});
+	// };
 	renderActivities = async () => {
 		await this.props.fetchActivities(this.props.currentUser.user.id);
 		this.setState({
@@ -31,10 +37,6 @@ class ActivityFeed extends Component {
 	componentDidMount() {
 		this.renderActivities();
 	}
-	//try setting up an if statement
-	// componentDidUpdate(prevProps) {
-	// 	this.renderActivities();
-	// }
 
 	toggleNewActivity = () => {
 		let toggle = !this.state.displayAddActivity;
@@ -75,13 +77,8 @@ class ActivityFeed extends Component {
 		this.toggleNewActivity();
 		let post = async () => {
 			let newActivity = await this.props.postNewActivity(activity);
-			console.log("newActivity", newActivity);
 		};
 		post();
-		this.setState({
-			activities: []
-		});
-		this.renderActivities();
 	};
 
 	deleteActivity = activityId => {
