@@ -12,6 +12,26 @@ export default class NewActivityForm extends Component {
 			activityPicture: ""
 		};
 	}
+	componentDidMount() {
+		if (this.props.editMode) {
+			this.setState({
+				title: this.props.activityToEdit.title,
+				isPrivate: this.props.activityToEdit.isPrivate,
+				description: this.props.activityToEdit.description,
+				activityPicture: this.props.activityToEdit.pictureUrl,
+				id: this.props.activityToEdit.id
+			});
+		}
+	}
+
+	componentWillUnmount() {
+		this.state = {
+			title: "",
+			isPrivate: false,
+			description: "",
+			activityPicture: ""
+		};
+	}
 
 	handleChange = e => {
 		console.log(e.target.name, e.target.value);
@@ -30,6 +50,18 @@ export default class NewActivityForm extends Component {
 				[e.target.name]: e.target.value
 			});
 		}
+	};
+
+	handleUpdate = e => {
+		e.preventDefault();
+		let updated = {
+			title: this.state.title,
+			isPrivate: this.state.isPrivate,
+			description: this.state.description,
+			activityPicture: this.state.activityPicture,
+			id: this.state.id
+		};
+		this.props.handleUpdateActivity(updated);
 	};
 
 	handleSubmit = e => {
@@ -57,7 +89,7 @@ export default class NewActivityForm extends Component {
 		return (
 			<div className="row justify-content-md-center text-center">
 				<div className="col-md-6">
-					<form onSubmit={this.handleSubmit}>
+					<form>
 						<h3>New Activity</h3>
 						<label htmlFor="email">Title:</label>
 						<input
@@ -101,12 +133,21 @@ export default class NewActivityForm extends Component {
 							onChange={this.handleChange}
 							value={description}
 						/>
-						<button
-							type="submit"
-							className="btn btn-primary btn-block"
-						>
-							Create
-						</button>
+						{this.props.activityToEdit ? (
+							<button
+								className="btn btn-primary btn-block"
+								onClick={this.handleUpdate}
+							>
+								Update
+							</button>
+						) : (
+							<button
+								onClick={this.handleSubmit}
+								className="btn btn-primary btn-block"
+							>
+								Create
+							</button>
+						)}
 					</form>
 				</div>
 			</div>
