@@ -98,7 +98,7 @@ export const deleteSession = idObj => (dispatch, getState) => {
 		}`
 	)
 		.then(res => {
-			dispatch(removeSession());
+			dispatch(fetchOneActivity(id, idObj.activityId));
 		})
 		.catch(err => {
 			dispatch(addError(err.message));
