@@ -31,6 +31,10 @@ class ActivityFeed extends Component {
 	componentDidMount() {
 		this.renderActivities();
 	}
+	//try setting up an if statement
+	// componentDidUpdate(prevProps) {
+	// 	this.renderActivities();
+	// }
 
 	toggleNewActivity = () => {
 		let toggle = !this.state.displayAddActivity;
@@ -74,6 +78,9 @@ class ActivityFeed extends Component {
 			console.log("newActivity", newActivity);
 		};
 		post();
+		this.setState({
+			activities: []
+		});
 		this.renderActivities();
 	};
 
