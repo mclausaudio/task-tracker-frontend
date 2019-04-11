@@ -60,9 +60,10 @@ const Main = props => {
 				<Route
 					exact
 					path="/dashboard"
-					render={props => {
-						return <Dashboard {...props} />;
-					}}
+					component={withAuth(Dashboard)}
+					// render={props => {
+					// 	return <Dashboard {...props} />;
+					// }}
 					// component={withAuth(Dashboard)}
 					//Below doesn't work.. What do I do if I need to wrap a component in a HOC and pass it unique props?
 					// render={props => {
@@ -72,18 +73,18 @@ const Main = props => {
 				<Route
 					exact
 					path="/users/:id/activities/:activity_id"
-					// component={withAuth(Activity)}
-					render={props => {
-						return <Activity {...props} />;
-					}}
+					component={withAuth(Activity)}
+					// render={props => {
+					// 	return <Activity {...props} />;
+					// }}
 				/>
 				<Route
 					exact
 					path="/users/:id/activities/:activity_id/sessions/new"
-					render={props => {
-						return <NewSession {...props} />;
-					}}
-					// component={withAuth(NewSession)}
+					// render={props => {
+					// 	return <NewSession {...props} />;
+					// }}
+					component={withAuth(NewSession)}
 				/>
 			</Switch>
 		</div>

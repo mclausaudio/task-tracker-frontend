@@ -104,11 +104,14 @@ class Activity extends Component {
 							New Session
 						</Link>
 						<button
-							className="btn btn-info"
+							className="btn btn-info mr-3"
 							onClick={this.renderSessions}
 						>
 							Reload
 						</button>
+						<Link className="btn btn-warning" to="/dashboard">
+							Back
+						</Link>
 					</div>
 				)}
 				<h2>Total Time: {secondsConverter(totalTime)}</h2>

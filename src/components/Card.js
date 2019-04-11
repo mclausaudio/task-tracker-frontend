@@ -16,14 +16,17 @@ const Card = props => {
 			<div className="card-body">
 				<h5 className="card-title">{title}</h5>
 				<p className="card-text">{description}</p>
-				<Link to={path} className="btn btn-primary">
+				<Link to={path} className="btn btn-primary btn-block">
 					View
 				</Link>
-				<button className="btn btn-warning" onClick={editActivity}>
+				<button
+					className="btn btn-warning btn-block"
+					onClick={editActivity}
+				>
 					Edit
 				</button>
 				<button
-					className="btn btn-danger"
+					className="btn btn-danger btn-block"
 					onClick={() => {
 						console.log(id);
 						props.deleteActivity(id);
