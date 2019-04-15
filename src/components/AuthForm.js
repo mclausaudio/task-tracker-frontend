@@ -24,7 +24,13 @@ export default class AuthForm extends Component {
 		console.log("handle submit");
 		//use that boolean prop to determine what type of auth, signup or login
 		const authType = this.props.signUp ? "signup" : "signin";
-		this.props.onAuth(authType, this.state).then(console.log("success"));
+		this.props
+			.onAuth(authType, this.state)
+			.then(() => {
+				console.log("success");
+				this.props.history.push("/dashboard");
+			})
+			.catch(err => err);
 	};
 
 	render() {

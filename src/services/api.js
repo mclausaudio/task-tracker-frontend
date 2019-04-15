@@ -4,8 +4,9 @@ import axios from "axios";
 export function apiCall(method, path, data) {
 	//it will return a new promise, we will resolve the promise when our actions have resolved
 	return new Promise((resolve, reject) => {
-		//return the axios request, with whatever method i pass in (cant do . and need to use brackets because we need to evaluate the value of 'method'.  axios[method] returns a function which we can then immediately invoke and pass in our path and our data)
+		//return the axios request, with whatever method i pass in (cant do '.' and need to use brackets because we need to evaluate the value of 'method'.  axios[method] returns a function which we can then immediately invoke and pass in our path and our data)
 		return (
+			//ex axios.get(path, data)
 			axios[method](path, data)
 				//then return the appropriate axios obj responses.  successful requests always have a sub obj called data
 				.then(res => {
@@ -17,4 +18,13 @@ export function apiCall(method, path, data) {
 				})
 		);
 	});
+}
+
+export function setTokenHeader(token) {
+	// alert("inside set token header");
+	if (token) {
+		axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+	} else {
+		delete axios.defaults.headers.common["Authorization"];
+	}
 }
