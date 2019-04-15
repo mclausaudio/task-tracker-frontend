@@ -14,8 +14,7 @@ const Main = props => {
 	const { authUser, errors, removeError, currentUser } = props;
 
 	return (
-		<div className="container">
-			<p>in switch</p>
+		<div className="container main">
 			<Switch>
 				<Route
 					exact
@@ -61,11 +60,8 @@ const Main = props => {
 					exact
 					path="/dashboard"
 					component={withAuth(Dashboard)}
-					// render={props => {
-					// 	return <Dashboard {...props} />;
-					// }}
-					// component={withAuth(Dashboard)}
 					//Below doesn't work.. What do I do if I need to wrap a component in a HOC and pass it unique props?
+					// Answer to above ^,  need to pass in whatever props I need via Redux, to the Class inside the HOC
 					// render={props => {
 					// 	return withAuth(<Dashboard {...props} />);
 					// }}

@@ -44,8 +44,8 @@ class NewSession extends Component {
 	render() {
 		let { seconds, showTimer } = this.state;
 		return (
-			<div>
-				<h1>New Session</h1>
+			<div className="mt-4 text-center">
+				<h1 className="mb-5">New Session</h1>
 				<div>
 					{showTimer ? (
 						<Timer timerComplete={this.handleTimerComplete} />

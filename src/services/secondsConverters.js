@@ -13,5 +13,5 @@ export function secondsConverter(d) {
 
 export function secondsToMinsRounded(d) {
 	d = Number(d);
-	return Math.floor((d % 3600) / 60);
+	return Math.floor(d / 60);
 }

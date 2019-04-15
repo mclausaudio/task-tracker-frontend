@@ -6,6 +6,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 import Navbar from "./Navbar";
 import Main from "./Main";
+import Footer from "../components/Footer";
 import { setAuthorizationHeader, setCurrentUser } from "../store/actions/auth";
 
 const store = configureStore();
@@ -29,10 +30,9 @@ class App extends Component {
 		return (
 			<Provider store={store}>
 				<Router>
-					<div>
-						<Navbar />
-						<Main />
-					</div>
+					<Navbar />
+					<Main />
+					<Footer />
 				</Router>
 			</Provider>
 		);

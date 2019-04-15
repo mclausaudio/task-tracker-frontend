@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { logoutUser } from "../store/actions/auth";
 
+import { FaProjectDiagram } from "react-icons/fa";
 class Navbar extends Component {
 	render() {
 		const { currentUser, logoutUser } = this.props;
@@ -10,26 +11,33 @@ class Navbar extends Component {
 		return (
 			<nav className="navbar navbar-expand">
 				<div className="container-fluid">
-					<Link to="/" className="navbar-brand">
-						text
-					</Link>
+					<div className="navbar-header">
+						<Link to="/" className="navbar-brand">
+							<FaProjectDiagram className="mr-3" />
+							Task Tracker
+						</Link>
+					</div>
+
+					{!currentUser.isAuthenticated ? (
+						<ul className="nav navbar-nav navbar-right">
+							<li>
+								<Link to="/signup">Sign up</Link>
+							</li>
+							<li>
+								<Link to="/signin">Log in</Link>
+							</li>
+						</ul>
+					) : (
+						<div className="nav navbar-nav navbar-right">
+							<li>
+								<Link to="/dashboard">Dashboard</Link>
+							</li>
+							<li>
+								<Link onClick={logoutUser}>Logout</Link>
+							</li>
+						</div>
+					)}
 				</div>
-				{!currentUser.isAuthenticated ? (
-					<ul className="nav navbar-nav navbar-right">
-						<li>
-							<Link to="/signup">Sign up</Link>
-						</li>
-						<li>
-							<Link to="/signin">Log in</Link>
-						</li>
-					</ul>
-				) : (
-					<ul className="nav navbar-nav navbar-right">
-						<li>
-							<a onClick={logoutUser}>logout</a>
-						</li>
-					</ul>
-				)}
 			</nav>
 		);
 	}

@@ -143,7 +143,7 @@ export default class NewActivityForm extends Component {
 						) : (
 							<button
 								onClick={this.handleSubmit}
-								className="btn btn-primary btn-block"
+								className="btn btn-primary btn-block mt-3"
 							>
 								Create
 							</button>

@@ -20,7 +20,7 @@ class SessionCard extends Component {
 			activityId
 		} = this.props;
 		return (
-			<div className="card">
+			<div className="card w-75 mt-2">
 				<div className="card-body">
 					<h5 className="card-title">
 						<Moment parse="YYYY-MM-DD HH:mm">{createdAt}</Moment>
@@ -30,21 +30,26 @@ class SessionCard extends Component {
 					</p>
 
 					<p className="card-text">{description}</p>
-					<button
-						className="btn btn-warning btn-block"
-						onClick={this.handleToggle}
-					>
-						Edit
-					</button>
-					<button
-						className="btn btn-danger btn-block"
-						onClick={() => {
-							console.log(this.props);
-							this.props.deleteSession({ activityId, sessionId });
-						}}
-					>
-						Delete
-					</button>
+					<div className="btn-group">
+						<button
+							className="btn btn-warning"
+							onClick={this.handleToggle}
+						>
+							Edit
+						</button>
+						<button
+							className="btn btn-danger"
+							onClick={() => {
+								console.log(this.props);
+								this.props.deleteSession({
+									activityId,
+									sessionId
+								});
+							}}
+						>
+							Delete
+						</button>
+					</div>
 				</div>
 			</div>
 		);
