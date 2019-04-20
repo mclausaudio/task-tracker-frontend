@@ -82,7 +82,6 @@ class ActivityFeed extends Component {
 	};
 
 	deleteActivity = activityId => {
-		console.log("inhere");
 		let remove = async () => {
 			await this.props.deleteActivity(activityId);
 		};

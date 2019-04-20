@@ -25,7 +25,6 @@ class Activity extends Component {
 	}
 
 	renderSessions = () => {
-		console.log("rerendering");
 		this.props.fetchOneActivity(
 			this.props.match.params.id,
 			this.props.match.params.activity_id
@@ -104,12 +103,6 @@ class Activity extends Component {
 							>
 								New Session
 							</Link>
-							<button
-								className="btn btn-info mr-3"
-								onClick={this.renderSessions}
-							>
-								Reload
-							</button>
 							<Link className="btn btn-warning" to="/dashboard">
 								Back
 							</Link>

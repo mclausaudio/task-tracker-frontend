@@ -18,7 +18,7 @@ const Card = props => {
 				src={picture}
 				alt="Card image cap"
 			/>
-			<div className="card-body">
+			<div className="card-body d-flex flex-column justify-content-between">
 				<h5 className="card-title">{title}</h5>
 				<p className="card-text">{description}</p>
 				<div className="btn-group">
