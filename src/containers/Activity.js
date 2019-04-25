@@ -25,7 +25,6 @@ class Activity extends Component {
 	}
 
 	renderSessions = () => {
-		console.log("rerendering");
 		this.props.fetchOneActivity(
 			this.props.match.params.id,
 			this.props.match.params.activity_id
@@ -76,42 +75,45 @@ class Activity extends Component {
 				/>
 			);
 		});
-		console.log(this.props);
 		return (
 			<div className="text-center">
-				<h2>{activity.title}</h2>
+				<h1 classNAme="mt-5 mb-5">{activity.title}</h1>
 				<Chart timeArray={timeArray} dateArray={dateArray} />
-				{isEditing ? (
-					<div>
-						<SessionEditForm
-							userId={this.props.currentUser.user.id}
-							activityId={this.props.activity._id}
-							sessionId={this.state.sessionIdToEdit}
-							toggleEditing={this.toggleEditing}
-							renderSessions={this.renderSessions}
-						/>
-					</div>
-				) : (
-					<div>
-						<Link
-							className="btn btn-primary mr-3"
-							to={`/users/${
-								this.props.match.params.id
-							}/activities/${
-								this.props.match.params.activity_id
-							}/sessions/new`}
-						>
-							New Session
-						</Link>
-						<button
-							className="btn btn-info"
-							onClick={this.renderSessions}
-						>
-							Reload
-						</button>
-					</div>
-				)}
-				<h2>Total Time: {secondsConverter(totalTime)}</h2>
+				<h6 className="mb-4">
+					The graph's session times are rounded down to nearest
+					minute.
+				</h6>
+				<div className="mt-2 mb-3">
+					{isEditing ? (
+						<div>
+							<SessionEditForm
+								userId={this.props.currentUser.user.id}
+								activityId={this.props.activity._id}
+								sessionId={this.state.sessionIdToEdit}
+								toggleEditing={this.toggleEditing}
+								renderSessions={this.renderSessions}
+							/>
+						</div>
+					) : (
+						<div>
+							<Link
+								className="btn btn-primary mr-3"
+								to={`/users/${
+									this.props.match.params.id
+								}/activities/${
+									this.props.match.params.activity_id
+								}/sessions/new`}
+							>
+								New Session
+							</Link>
+							<Link className="btn btn-warning" to="/dashboard">
+								Back
+							</Link>
+						</div>
+					)}
+				</div>
+
+				<h2>Total time spent: {secondsConverter(totalTime)}</h2>
 				<h4>Sessions (starting with most recent):</h4>
 				<div className="d-flex justify-content-center flex-wrap">
 					{listOfSessions}

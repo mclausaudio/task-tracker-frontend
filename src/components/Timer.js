@@ -42,14 +42,27 @@ export default class Timer extends Component {
 
 		return (
 			<div>
-				<h2>{secondsConverter(seconds)}</h2>
-				{isTiming ? (
-					<button onClick={this.pauseTimer}>Pause</button>
-				) : (
-					<button onClick={this.startTimer}>Start</button>
-				)}
-
-				<button onClick={this.endTimer}>Finish</button>
+				<h2 className="mb-5">{secondsConverter(seconds)}</h2>
+				<div className="btn-group">
+					{isTiming ? (
+						<button
+							onClick={this.pauseTimer}
+							className="btn btn-warning"
+						>
+							Pause
+						</button>
+					) : (
+						<button
+							onClick={this.startTimer}
+							className="btn btn-primary"
+						>
+							Start
+						</button>
+					)}
+					<button onClick={this.endTimer} className="btn btn-success">
+						Finish
+					</button>
+				</div>
 			</div>
 		);
 	}

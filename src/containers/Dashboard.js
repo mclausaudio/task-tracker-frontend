@@ -3,6 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
 import ActivityFeed from "../components/ActivityFeed";
+import UserInfo from "../components/UserInfo";
 
 class Dashboard extends Component {
 	render() {
@@ -10,13 +11,14 @@ class Dashboard extends Component {
 		console.log("dash", activities);
 
 		return (
-			<div className="row">
+			<div className="mt-5 row">
 				{/* below is side bar, can break out into component */}
-				<div className="col-md-2">
-					<p>Hello</p>
+				<div className="col-md-3 d-none d-sm-none d-md-block">
+					<UserInfo currentUser={this.props.currentUser} />
 				</div>
+
 				{/* below is main feed */}
-				<div className="col-md-10">
+				<div className="col-md-9">
 					<ActivityFeed />
 				</div>
 			</div>

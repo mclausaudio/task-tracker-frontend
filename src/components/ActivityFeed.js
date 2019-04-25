@@ -16,7 +16,7 @@ class ActivityFeed extends Component {
 		this.state = {
 			displayAddActivity: false,
 			editMode: false,
-			addActivityBtnText: "New Activity",
+			addActivityBtnText: "Add new activity",
 			activities: []
 		};
 	}
@@ -45,7 +45,7 @@ class ActivityFeed extends Component {
 		}
 		this.setState({
 			displayAddActivity: toggle,
-			addActivityBtnText: toggle ? "Hide Form" : "New Activity"
+			addActivityBtnText: toggle ? "Hide Form" : "Add new activity"
 		});
 	};
 	//this is for the CARD to set some state
@@ -82,7 +82,6 @@ class ActivityFeed extends Component {
 	};
 
 	deleteActivity = activityId => {
-		console.log("inhere");
 		let remove = async () => {
 			await this.props.deleteActivity(activityId);
 		};
@@ -108,7 +107,9 @@ class ActivityFeed extends Component {
 		let { displayAddActivity, editMode, addActivityBtnText } = this.state;
 		let { errors, currentUser } = this.props;
 		// console.log(activities.length);
-		let activitiesList = <p>No activities</p>;
+		let activitiesList = (
+			<h5 className="mx-auto mt-5">No activities to display</h5>
+		);
 		if (this.props.activities.length > 0) {
 			activitiesList = this.props.activities.map(a => {
 				return (
@@ -132,9 +133,12 @@ class ActivityFeed extends Component {
 
 		return (
 			<div>
+				<h1 className="text-center mb-5">
+					Welcome, {currentUser.user.username}
+				</h1>
 				<div>
 					<button
-						className="btn btn-primary"
+						className="btn btn-primary btn-block mb-3"
 						onClick={this.toggleNewActivity}
 					>
 						{addActivityBtnText}
@@ -152,8 +156,8 @@ class ActivityFeed extends Component {
 					/>
 				)}
 
-				<p>Your Activities:</p>
-				<div className="row d-flex">{activitiesList}</div>
+				<h3 className="text-center">Your Activities:</h3>
+				<div className="row d-flex ">{activitiesList}</div>
 			</div>
 		);
 	}

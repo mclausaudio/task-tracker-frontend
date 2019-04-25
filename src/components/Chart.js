@@ -32,8 +32,11 @@ export default class extends Component {
 								displayFormats: {
 									minute: "mm:ss"
 								}
+							},
+							ticks: {
+								beginAtZero: true,
+								min: 0
 							}
-							// position: "bottom"
 						}
 					]
 				}
