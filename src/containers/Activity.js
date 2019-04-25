@@ -75,12 +75,15 @@ class Activity extends Component {
 				/>
 			);
 		});
-		console.log(this.props);
 		return (
 			<div className="text-center">
 				<h1 classNAme="mt-5 mb-5">{activity.title}</h1>
 				<Chart timeArray={timeArray} dateArray={dateArray} />
-				<div className="mt-1 mb-3">
+				<h6 className="mb-4">
+					The graph's session times are rounded down to nearest
+					minute.
+				</h6>
+				<div className="mt-2 mb-3">
 					{isEditing ? (
 						<div>
 							<SessionEditForm

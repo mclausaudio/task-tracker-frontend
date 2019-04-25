@@ -2,17 +2,19 @@ import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import Dashboard from "../containers/Dashboard";
 
-import LandingAbout from "./landing/LandingAbout";
+import LandingPage from "./landing/LandingPage";
 const Homepage = ({ currentUser, history }) => {
-	if (!currentUser.isAuthenticated) {
-		return (
-			<div>
-				<section>
-					<div className="home-hero">
-						<div className="overlay" />
-						<div className="hero-text">
-							<h1>Task-Tracker</h1>
-							<h2 className="mb-2">Track your tasks</h2>
+	return (
+		<div>
+			<section>
+				<div className="home-hero">
+					<div className="overlay" />
+					<div className="hero-text">
+						<h1>Task-Tracker</h1>
+						<h3 className="mb-2">
+							Helping you visualize your productivity
+						</h3>
+						{!currentUser.isAuthenticated ? (
 							<div className="mt-2">
 								<Link
 									to="/signup"
@@ -24,15 +26,22 @@ const Homepage = ({ currentUser, history }) => {
 									Sign In
 								</Link>
 							</div>
-						</div>
+						) : (
+							<div className="mt-2">
+								<Link
+									to="/dashboard"
+									className="btn btn-primary"
+								>
+									View Dashboard
+								</Link>
+							</div>
+						)}
 					</div>
-				</section>
-				<LandingAbout />
-			</div>
-		);
-	} else {
-		return <Redirect to="/dashboard" />;
-	}
+				</div>
+			</section>
+			<LandingPage />
+		</div>
+	);
 };
 
 export default Homepage;

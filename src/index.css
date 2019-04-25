@@ -56,6 +56,10 @@ code {
 	text-shadow: 2px 2px 4px #000000;
 }
 
+.hero-text h1 {
+	font-family: "Pacifico", cursive;
+}
+
 .overlay {
 	position: absolute;
 	z-index: 1;
@@ -78,6 +82,12 @@ nav {
 	margin-right: 1rem;
 }
 
+.landing-page-card {
+	font-size: 5rem;
+	text-align: center;
+	padding: 1.5rem 0;
+}
+
 .about {
 	margin-top: 100vh;
 }
@@ -89,6 +99,7 @@ nav {
 
 .about-title {
 	margin-bottom: 3rem;
+	text-align: center;
 }
 
 .about-text {
@@ -99,17 +110,6 @@ nav {
 	margin: 0 auto;
 }
 
-@keyframes down-arrow {
-	0% {
-		opacity: 0;
-		margin-bottom: 1em;
-	}
-	50% {
-		opacity: 1;
-		margin-bottom: 0;
-	}
-	100% {
-		opacity: 0;
-		margin-bottom: 1em;
-	}
-}
+/* .how-it-works {
+	background-color: #71d0ff;
+} */

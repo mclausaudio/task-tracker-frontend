@@ -11,10 +11,12 @@ import { removeError } from "../store/actions/errors";
 import withAuth from "../hocs/withAuth";
 
 const Main = props => {
-	const { authUser, errors, removeError, currentUser } = props;
-
+	const { authUser, errors, removeError, currentUser, history } = props;
+	history.listen(() => {
+		removeError();
+	});
 	return (
-		<div className="container main">
+		<div className="main">
 			<Switch>
 				<Route
 					exact
