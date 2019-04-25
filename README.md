@@ -22,7 +22,7 @@ After signing in, users can create an 'activity' that they wish to monitor.  The
 ## Higher Order Components.
 I ran into an issue with protecting my react routes.  Through research, I discovered a concept called Higher Order Components or HOCs in React.  By created a function that we pass components into, we can write code once and provide that fuctionality to each component we pass in, rather than checking for auth on each component / route manually.
 
-![HOC](HOC.png)
+![HOC](https://github.com/mclausaudio/task-tracker-frontend/blob/master/HOC.png?raw=true)
 
 ## Redux Action Dispatching
 Beginning this project, I had very little experience (even exposure!) to Redux, but I had been so curious as to what it does and why it's useful.  So I decided to roll up my sleeves and give it a shot.  It was difficult at first but I began getting the hang of it.  I used Redux Thunk to make async API calls.  I began realizing that for a project of this size, Redux is unnessary, but I had a great time building with it and learned so much.
@@ -32,7 +32,7 @@ Beginning this project, I had very little experience (even exposure!) to Redux, 
 ## API Calls
 You may have noticed in the previous screen shot that I broke out my API call function into a seperate function.  Rather than writing it over and over again for each action dispatcher, I wrote a seperate reusable function for making the API calls.  Instead of return the API data, I return a new Promise.  This way, we can continue to chain .thens in the dispatcher.
 
-![APICalls](apiCall.png)
+![APICalls](https://github.com/mclausaudio/task-tracker-frontend/blob/master/apiCall.png?raw=true)
 
 ## Async / Await Functions
 Before this project, I was unfamiliar with the new Async / Await functions.  But now they are a piece of cake and I like them so much better than a callback pattern or chaining .thens
