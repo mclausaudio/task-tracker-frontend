@@ -22,6 +22,8 @@ After signing in, users can create an 'activity' that they wish to monitor.  The
 ## Higher Order Components.
 I ran into an issue with protecting my react routes.  Through research, I discovered a concept called Higher Order Components or HOCs in React.  By created a function that we pass components into, we can write code once and provide that fuctionality to each component we pass in, rather than checking for auth on each component / route manually.
 
+![HOC](HOC.png)
+
 ## Redux Action Dispatching
 Beginning this project, I had very little experience (even exposure!) to Redux, but I had been so curious as to what it does and why it's useful.  So I decided to roll up my sleeves and give it a shot.  It was difficult at first but I began getting the hang of it.  I used Redux Thunk to make async API calls.  I began realizing that for a project of this size, Redux is unnessary, but I had a great time building with it and learned so much.
 
